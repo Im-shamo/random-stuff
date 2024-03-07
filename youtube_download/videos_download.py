@@ -1,6 +1,7 @@
 from pytube import YouTube, Stream
 from exceptions import *
 from user_input import *
+from time import time
 
 
 class VideosDownload:
@@ -13,7 +14,23 @@ class VideosDownload:
             self.videos = videos
         else:
             raise NoVideosAvailable
-        self.stream_qs = [video.streams for video in self.videos]
+        # self.stream_qs = [video.streams for video in self.videos]
+
+        start = time()
+        self.stream_qs = []
+        for i, video in enumerate(self.videos):
+            try:
+                self.stream_qs.append(video.streams)
+            except Exception as e:
+                print(f"Error {e}")
+            else:
+                print((str(i) + " " + video.title))
+
+
+        end = time()
+        time_took = end-start
+        print(f"{time_took=:.2f}")
+
         self.download_dir = download_dir
         self.streams = []
         self.failed_downloads = []
@@ -83,14 +100,14 @@ class VideosDownload:
 
         # [print(f"{i+1:^4}| Filesize: {stream.filesize_mb}MB {'':^4}| Title: {stream.title}")
         #  for i, stream in enumerate(self.streams)]
-        
+
         total_size = 0
         for i, stream in enumerate(self.streams):
             size = stream.filesize_mb
             total_size += size
-            print(f"{i+1:^4}| Filesize: {stream.filesize_mb:.2f} MB {'':^4}| Title: {stream.title}")
+            print(
+                f"{i+1:^4}| Filesize: {stream.filesize_mb:.2f} MB {'':^4}| Title: {stream.title}")
         print(f"Total size is {total_size:.2f} MB")
-            
 
     def print_stream_qs(self):
         # make the output nicer

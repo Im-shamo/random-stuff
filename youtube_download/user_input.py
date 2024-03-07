@@ -1,6 +1,6 @@
 from utility import *
+import file_operations as f
 import os
-
 
 def mode_select(modes: dict) -> str:
 
@@ -193,20 +193,39 @@ def get_confirm(question, default=None):
         elif answer.lower().strip() in ["no", "n"]:
             return False
 
-
-def get_download_dir():
+# change to path.lib library and use relative path
+def get_download_dir(folder_name):
 
     while True:
-        download_dir = get_input(
-            "Enter download directory",
-            os.path.join(os.path.expanduser("~"), "Videos")
-        )
+        # anwser = get_input(
+        #     "Enter download directory",
+        #     os.path.join(os.path.expanduser("~"), "Videos")
+        # )
         # implemant path checking
+
+
+        download_dir = f.get_dir("Enter download path", os.path.join(os.path.expanduser("~"), "Videos"))
+
+        
+        if download_dir is None:
+            print(f"Error. Folder not found")
+            continue
+
+        if folder_name:
+            created_path = os.path.join(download_dir, folder_name)
+            if get_confirm(f"Create folder for playlist at({created_path})"):
+                os.mkdir(created_path)
+
+                download_dir = created_path
+
+
+
         print(f"saving to {download_dir}")
 
         if get_confirm("Confirm location", "y"):
-
+    
             return download_dir
+
 
 
 def get_links():

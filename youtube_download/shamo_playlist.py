@@ -17,10 +17,10 @@ def shamo_playlist():
     [print(f"{i+1} | Playlist title: {playlist.title:<40} | No. vidoes: {playlist.length}")
      for i, playlist in enumerate(playlists)]
 
-    selection = get_selection(playlists)
+    selection:list[Playlist] = get_selection(playlists)
 
     if get_confirm("Continue"):
-        [shamo_videos(playlist.videos) for playlist in selection]
+        [shamo_videos(playlist.videos, playlist.title) for playlist in selection]
 
 
 if __name__ == "__main__":

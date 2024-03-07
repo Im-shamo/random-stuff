@@ -3,7 +3,7 @@ from videos_download import VideosDownload
 from user_input import *
 
 
-def shamo_videos(videos=None):
+def shamo_videos(videos=None, folder_name=None):
 
     while not (videos):
         try:
@@ -13,7 +13,7 @@ def shamo_videos(videos=None):
         except Exception as e:
             print(e)
 
-    download_dir = get_download_dir()
+    download_dir = get_download_dir(folder_name)
 
     # [print(f"{i+1:^4} | Author: {video.author:.20} | Video title: {video.title:<40} | Length: {seconds_to_min(video.length)}")
     #  for i, video in enumerate(videos)]
