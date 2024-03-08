@@ -17,18 +17,22 @@ class VideosDownload:
         # self.stream_qs = [video.streams for video in self.videos]
 
         start = time()
+        time_per_stream: list[float] = []
         self.stream_qs = []
         for i, video in enumerate(self.videos):
+            start_2 = time()
             try:
                 self.stream_qs.append(video.streams)
             except Exception as e:
                 print(f"Error {e}")
             else:
                 print((str(i) + " " + video.title))
-
-
+            end_2 = time()
+            time_per_stream.append(end_2 - start_2)
         end = time()
+
         time_took = end-start
+        print(f"{time_per_stream=}")
         print(f"{time_took=:.2f}")
 
         self.download_dir = download_dir

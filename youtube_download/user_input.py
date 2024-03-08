@@ -2,26 +2,25 @@ from utility import *
 import file_operations as f
 import os
 
-def mode_select(modes: dict) -> str:
+def mode_select(modes: dict, default=None) -> str:
 
     question = f"\nPlease select mode (1 - {len(modes)})"
+    if default:
+        question += f"\nDefault: {default}"
     for i, name in enumerate(modes):
         question += f"\n({i + 1}) {name}"
 
     question += "\n(-1) Quit\n>"
 
     while True:
-
-        try:
-            mode = int(input(question))
-
-            if mode == -1:
-                quit()
-
-            elif mode >= 1 and mode <= len(modes):
+        answer = input(question)
+        if answer.isdigit():
+            mode = int(answer)
+            if check_num_range(mode, 1, len(modes)):
                 return list(modes)[mode-1]
-
-        except ValueError:
+        elif answer == "-1":
+            quit()
+        else:
             print("\nMode not found. Please try again")
 
 
@@ -90,7 +89,7 @@ def mode_select(modes: dict) -> str:
 
 
 class SelectionFromNumber:
-    def __init__(self, array) -> None:
+    def __init__(self, array:list) -> None:
         self.array = array
         self.length = len(self.array)
         self.selection: list = []
@@ -213,12 +212,12 @@ def get_download_dir(folder_name):
 
         if folder_name:
             created_path = os.path.join(download_dir, folder_name)
-            if get_confirm(f"Create folder for playlist at({created_path})"):
+            if get_confirm(f"Create folder for playlist at({created_path})") and not os.path.exists(created_path):
                 os.mkdir(created_path)
 
                 download_dir = created_path
-
-
+            elif get_confirm("Folder exists do you want to proceed", "n"):
+                download_dir = created_path
 
         print(f"saving to {download_dir}")
 
