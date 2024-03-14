@@ -26,7 +26,8 @@ def shamo_videos(videos=None, folder_name=None):
         length = seconds_to_min(video.length)
         num = str(i+1)
 
-        output_text += f"{num:<4} | Author: {author:<15} | Length: {length:^5} | Video title: {title}\n"
+        output_text += f"{num:<4} | Author: {author:<15} | Length: {
+            length:^5} | Video title: {title}\n"
 
     print(output_text)
 

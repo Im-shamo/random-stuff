@@ -7,8 +7,10 @@ from time import time
 class VideosDownload:
     def __init__(self, videos: list[YouTube], download_dir: str) -> None:
 
-        self.streams: list[Stream]
-        self.failed_downloads: list[Stream]
+        self.streams: list[Stream] = []
+        self.failed_downloads: list[Stream] = []
+        self.download_dir = download_dir
+        self.filtered = False
 
         if videos:
             self.videos = videos
@@ -34,11 +36,6 @@ class VideosDownload:
         time_took = end-start
         print(f"{time_per_stream=}")
         print(f"{time_took=:.2f}")
-
-        self.download_dir = download_dir
-        self.streams = []
-        self.failed_downloads = []
-        self.filtered = False
 
     def download(self, print_info=False) -> None:
         self.failed_downloads = []

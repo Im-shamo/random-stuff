@@ -1,7 +1,8 @@
 from user_input import get_selection, SelectionFromNumber
 from time import time
 
-fruits = ["apple", "banana", "orange", "grape", "watermelon", "strawberry", "pineapple", "mango", "kiwi", "pear", "cherry", "blueberry", "lemon", "lime", "peach", "plum", "raspberry", "blackberry", "pomegranate", "avocado"]
+fruits = ["apple", "banana", "orange", "grape", "watermelon", "strawberry", "pineapple", "mango", "kiwi", "pear",
+          "cherry", "blueberry", "lemon", "lime", "peach", "plum", "raspberry", "blackberry", "pomegranate", "avocado"]
 
 
 def selection():

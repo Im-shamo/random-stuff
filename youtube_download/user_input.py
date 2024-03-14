@@ -2,6 +2,7 @@ from utility import *
 import file_operations as f
 import os
 
+
 def mode_select(modes: dict, default=None) -> str:
 
     question = f"\nPlease select mode (1 - {len(modes)})"
@@ -89,7 +90,7 @@ def mode_select(modes: dict, default=None) -> str:
 
 
 class SelectionFromNumber:
-    def __init__(self, array:list) -> None:
+    def __init__(self, array: list) -> None:
         self.array = array
         self.length = len(self.array)
         self.selection: list = []
@@ -193,6 +194,8 @@ def get_confirm(question, default=None):
             return False
 
 # change to path.lib library and use relative path
+
+
 def get_download_dir(folder_name):
 
     while True:
@@ -202,10 +205,9 @@ def get_download_dir(folder_name):
         # )
         # implemant path checking
 
+        download_dir = f.get_dir("Enter download path", os.path.join(
+            os.path.expanduser("~"), "Videos"))
 
-        download_dir = f.get_dir("Enter download path", os.path.join(os.path.expanduser("~"), "Videos"))
-
-        
         if download_dir is None:
             print(f"Error. Folder not found")
             continue
@@ -222,9 +224,8 @@ def get_download_dir(folder_name):
         print(f"saving to {download_dir}")
 
         if get_confirm("Confirm location", "y"):
-    
-            return download_dir
 
+            return download_dir
 
 
 def get_links():
